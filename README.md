@@ -41,7 +41,7 @@ users:
 ```
 helm upgrade -i k8s-sftp-gcs ./helm -f users.yaml
 ```
-### 6. Get the test IP and port:
+### 6. Get the IP address and port:
 ```kubectl get svc k8s-sftp-gcs```
 
 This will give you EXTERNAL-IP and port.
