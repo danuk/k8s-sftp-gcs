@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "sftp-gcs.fullname" . }}
+  labels:
+    {{- include "sftp-gcs.labels" . | nindent 4 }}
+{{- with .Values.service.annotations }}
+  annotations:
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+{{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: sftp
+      port: {{ .Values.service.port }}
+      targetPort: sftp
+      protocol: TCP
+  selector:
+    {{- include "sftp-gcs.selectorLabels" . | nindent 4 }}

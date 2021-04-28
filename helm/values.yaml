@@ -1,0 +1,59 @@
+users: []
+#- user: my_user_1
+#  password: my_password_1
+#  bucket: my_gcs_bucket
+#- user: my_user_2
+#  password: my_password_2
+#  bucket: my_gcs_bucket
+#  onlyDir: user2
+
+service:
+  type: LoadBalancer
+  port: 2022
+  annotations: {}
+    # cloud.google.com/load-balancer-type: External
+    # external-dns.alpha.kubernetes.io/hostname: ftp.mydomain
+
+image:
+  repository: danuk/k8s-sftp-gcs
+  tag: latest
+  pullPolicy: IfNotPresent
+
+#gcloud_key_base64: put_base64_gcloud_key_here
+#ssh_private_key_base64: put_base64_ssh_private_key_here
+
+imagePullSecrets: []
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  privileged: true
+  capabilities:
+    add:
+    - SYS_ADMIN
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

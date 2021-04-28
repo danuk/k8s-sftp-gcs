@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sftp-gcs.fullname" . }}
+  labels:
+    {{- include "sftp-gcs.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "sftp-gcs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/rules: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "sftp-gcs.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: /etc/sftp
+              name: users
+            - mountPath: /etc/sftp.d/
+              name: gcs-mounts
+            - mountPath: /credentials
+              name: sftp-gcloud-key
+            - name: ssh-key
+              mountPath: /etc/ssh/ssh_host_rsa_key
+              subPath: ssh_host_rsa_key
+          ports:
+            - name: sftp
+              containerPort: 22
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+         - name: users
+           configMap:
+             name: users
+         - name: gcs-mounts
+           configMap:
+             name: gcs-mounts
+             defaultMode: 0744
+         - name: sftp-gcloud-key
+           secret:
+             secretName: sftp-gcloud-key
+         - name: ssh-key
+           secret:
+             secretName: ssh-secret-key
+             defaultMode: 0400
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
