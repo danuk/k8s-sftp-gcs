@@ -39,7 +39,7 @@ users:
 
 ### 5. Deploy the SFTP server to Kubernetes:
 ```
-helm upgrade -i k8s-sftp-gcs ./helm -f users.yaml
+helm upgrade -i k8s-sftp-gcs ./k8s-sftp-gcs -f users.yaml
 ```
 ### 6. Get the IP address and port:
 ```kubectl get svc k8s-sftp-gcs```
