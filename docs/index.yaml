@@ -1,20 +1,17 @@
 apiVersion: v1
 entries:
   k8s-sftp-gcs:
-  - annotations:
-      artifacthub.io/links: |
-        - name: homelink
-          url: https://github.com/danuk/k8s-sftp-gcs
-      artifacthub.io/maintainers: |
-        - name: danuk
-          email: mail@danuk.ru
-    apiVersion: v1
+  - apiVersion: v1
     appVersion: 1.16.0
-    created: "2021-04-28T20:10:38.481494991+03:00"
+    created: "2021-04-28T20:14:25.29100148+03:00"
     description: A Helm chart for Kubernetes
-    digest: 7f655c74ab9676cc3ef65033783d539c9675d96385502014a76451df398eb295
+    digest: d90feadd348542d113ef1c585cd993c14bff22f9c80def80ff39c49a16bc8bfa
+    home: https://github.com/danuk/k8s-sftp-gcs
+    maintainers:
+    - email: mail@danuk.ru
+      name: danuk
     name: k8s-sftp-gcs
     urls:
     - https://danuk.github.io/k8s-sftp-gcs/k8s-sftp-gcs-0.1.0.tgz
     version: 0.1.0
-generated: "2021-04-28T20:10:38.481070659+03:00"
+generated: "2021-04-28T20:14:25.290583587+03:00"
