@@ -37,18 +37,18 @@ users:
 ```
 
 
-### 4. Deploy the SFTP server to Kubernetes:
+### 5. Deploy the SFTP server to Kubernetes:
 ```
 helm upgrade -i k8s-sftp-gcs ./helm -f users.yaml
 ```
-### 5. Get the test IP and port:
+### 6. Get the test IP and port:
 ```kubectl get svc k8s-sftp-gcs```
 
 This will give you EXTERNAL-IP and port.
 
 :information_source: We use Port 2022 for SFTP.
 
-### 6. Confirm you can SFTP using the usernames and password you setup in `etc/sftp*` with `sftp` utility:
+### 7. Confirm you can SFTP using the usernames and password you setup in `etc/sftp*` with `sftp` utility:
 ```
 $ sftp -P 2022 username@1.2.3.4
 username@1.2.3.4's password:
