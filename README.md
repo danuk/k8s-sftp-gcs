@@ -46,9 +46,7 @@ helm upgrade -i k8s-sftp-gcs ./k8s-sftp-gcs -f users.yaml
 
 This will give you EXTERNAL-IP and port.
 
-:information_source: We use Port 2022 for SFTP.
-
-### 7. Confirm you can SFTP using the usernames and password you setup in `etc/sftp*` with `sftp` utility:
+### 7. Check you SFTP server:
 ```
 $ sftp -P 2022 username@1.2.3.4
 username@1.2.3.4's password:
