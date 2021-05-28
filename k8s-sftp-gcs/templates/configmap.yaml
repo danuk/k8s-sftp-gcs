@@ -5,10 +5,9 @@ metadata:
 data:
   gcs-mounts.sh: |-
     #!/bin/bash
-    export GOOGLE_APPLICATION_CREDENTIALS=/credentials/gcloud-key.json
-
     {{ range $item, $user := .Values.users -}}
     runuser -l {{ $user.user }} -c \
+      export GOOGLE_APPLICATION_CREDENTIALS=/credentials/gcloud-key.json
       {{- if $user.onlyDir }}
       'gcsfuse --only-dir {{ $user.onlyDir }} {{ $user.bucket }} /home/{{ $user.user }}/ftp'
       {{ else }}
