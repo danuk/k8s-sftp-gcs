@@ -3,7 +3,21 @@ entries:
   k8s-sftp-gcs:
   - apiVersion: v1
     appVersion: 1.16.0
-    created: "2021-09-07T20:17:18.758104912+03:00"
+    created: "2022-10-27T15:51:35.064766754+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 25bc5cf734cafe58f7de9316ad636da0ab3751e295501ed137e8b4bd6e517d26
+    home: https://github.com/danuk/k8s-sftp-gcs
+    maintainers:
+    - email: mail@danuk.ru
+      name: danuk
+    name: k8s-sftp-gcs
+    type: application
+    urls:
+    - https://danuk.github.io/k8s-sftp-gcs/k8s-sftp-gcs-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v1
+    appVersion: 1.16.0
+    created: "2022-10-27T15:51:35.0643713+03:00"
     description: A Helm chart for Kubernetes
     digest: 0a6994b069ba3c934d731019f6a426319370199a1bb885c2365936288cde275a
     home: https://github.com/danuk/k8s-sftp-gcs
@@ -16,7 +30,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 1.16.0
-    created: "2021-09-07T20:17:18.757856374+03:00"
+    created: "2022-10-27T15:51:35.063986835+03:00"
     description: A Helm chart for Kubernetes
     digest: 8eb1bb2aab868d99d97f68c782f106f72ee2b838170867102f62c0644fdb006b
     home: https://github.com/danuk/k8s-sftp-gcs
@@ -27,4 +41,4 @@ entries:
     urls:
     - https://danuk.github.io/k8s-sftp-gcs/k8s-sftp-gcs-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-07T20:17:18.757488148+03:00"
+generated: "2022-10-27T15:51:35.063456471+03:00"
