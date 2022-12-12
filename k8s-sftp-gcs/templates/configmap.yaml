@@ -6,12 +6,14 @@ data:
   gcs-mounts.sh: |-
     #!/bin/bash
     {{ range $item, $user := .Values.users -}}
-    runuser -l {{ $user.user }} -c \
+    runuser -l {{ $user.user }} -c "
+      export GOOGLE_APPLICATION_CREDENTIALS=/credentials/gcloud-key.json
       {{- if $user.onlyDir }}
-      'export GOOGLE_APPLICATION_CREDENTIALS=/credentials/gcloud-key.json; gcsfuse --only-dir {{ $user.onlyDir }} {{ $user.bucket }} /home/{{ $user.user }}/ftp'
-      {{ else }}
-      'export GOOGLE_APPLICATION_CREDENTIALS=/credentials/gcloud-key.json; gcsfuse {{ $user.bucket }} /home/{{ $user.user }}/ftp'
+      gcsfuse --only-dir {{ $user.onlyDir }} {{ $user.bucket }} /home/{{ $user.user }}/ftp
+      {{- else }}
+      gcsfuse {{ $user.bucket }} /home/{{ $user.user }}/ftp
       {{- end }}
+      "
     {{ end }}
 ---
 apiVersion: v1
