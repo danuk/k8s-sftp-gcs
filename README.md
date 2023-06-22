@@ -10,7 +10,20 @@ To deploy to GKE follow these steps:
 
 ### 1. Create Service Account JSON key file for your bucket
 
+https://cloud.google.com/iam/docs/service-accounts-create#iam-service-accounts-create-gcloud
 https://cloud.google.com/iam/docs/creating-managing-service-account-keys
+
+Example:
+```bash
+export GCS_ACCOUNT=my-gcs-account
+export BUCKET=my-bucket
+export PROJECT_ID=my-project-id.iam.gserviceaccount.com
+
+gcloud iam service-accounts create ${GCS_ACCOUNT}
+#gcloud storage buckets create gs://${BUCKET}
+gcloud storage buckets add-iam-policy-binding gs://${BUCKET} --member=serviceAccount:${GCS_ACCOUNT}@${PROJECT_ID} --role=roles/storage.objectAdmin
+gcloud iam service-accounts keys create my_file.json --iam-account=${GCS_ACCOUNT}@${PROJECT_ID}
+```
 
 ### 2. Generate SSH private key
 ```ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key -N ''```
