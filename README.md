@@ -25,7 +25,7 @@ gcloud config set project ${PROJECT_NAME}
 gcloud iam service-accounts create ${GCS_ACCOUNT}
 gcloud storage buckets create gs://${BUCKET} --location=${BUCKET_LOCATION}
 gcloud storage buckets add-iam-policy-binding gs://${BUCKET} --member=serviceAccount:${GCS_ACCOUNT}@${PROJECT_ID} --role=roles/storage.objectAdmin
-gcloud iam service-accounts keys create my_file.json --iam-account=${GCS_ACCOUNT}@${PROJECT_ID}
+gcloud iam service-accounts keys create gcloud-key.json --iam-account=${GCS_ACCOUNT}@${PROJECT_ID}
 ```
 
 ### 2. Generate SSH private key
