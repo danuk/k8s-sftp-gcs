@@ -17,10 +17,13 @@ Example:
 ```bash
 export GCS_ACCOUNT=my-gcs-account
 export BUCKET=my-bucket
+export BUCKET_LOCATION=us
+export PROJECT_NAME=MY_PROJECT
 export PROJECT_ID=my-project-id.iam.gserviceaccount.com
 
+gcloud config set project ${PROJECT_NAME}
 gcloud iam service-accounts create ${GCS_ACCOUNT}
-#gcloud storage buckets create gs://${BUCKET}
+gcloud storage buckets create gs://${BUCKET} --location=${BUCKET_LOCATION}
 gcloud storage buckets add-iam-policy-binding gs://${BUCKET} --member=serviceAccount:${GCS_ACCOUNT}@${PROJECT_ID} --role=roles/storage.objectAdmin
 gcloud iam service-accounts keys create my_file.json --iam-account=${GCS_ACCOUNT}@${PROJECT_ID}
 ```
